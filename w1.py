@@ -9,25 +9,38 @@ class Queue:
 
     # Add an element to the tail (rear) of the queue
     def enqueue(self, item):
-        pass
+        if self.length() >= self.max_size:
+            raise OverflowError("Queue is full. Cannot enqueue")
+        self.items.append(item)
 
     # Remove the element from the head (front) of the queue
     def dequeue(self):
-        pass
+        if self.length() == 0:
+            raise IndexError("Queue is empty. Cannot dequeue")
+        self.items.pop(0)
 
     #  View the element at the head of the queue without removing it
     def peek_head(self):
-        pass
+        print("The first item is: " + str(self.items[0]))
+        #  raise QueueEmptyError("Cannot peek from an empty queue.")
 
     #  Return the number of elements in the queue
     def length(self):
-        pass
+        return len(self.items)
 
     # Design an algorithm to reverse a Queue using Stacks and Queues.
     # (Example: Convert Queue “12345” into Queue “54321”.)
     def reverse(self):
         # take things from FIFO to LIFO
         pass
+
+    def __str__(self):
+        return (
+            "The queue size is: "
+            + str(self.length())
+            + "; Values: "
+            + str(self.get_items())
+        )
 
 
 # Implement a Stack using an Array/List:
@@ -36,21 +49,37 @@ class Stack:
         self.items = []
         self.max_size = 5
 
+    def get_items(self):
+        return self.items
+
     # Add an element to the top of the stack
     def push(self, item):
-        pass
+        if self.length() >= self.max_size:
+            raise OverflowError("Stack is full. Cannot push.")
+        self.items.append(item)
 
     #  Remove the element from the top of the stack
     def pop(self):
-        pass
+        if self.length() == 0:
+            raise IndexError("Stack is empty. Cannot pop.")
+        self.items.pop(-1)
 
     # View the element at the top of the stack without removing it
-    def peek(self):
-        pass
+    def peek_head(self):
+        print("The first item is: " + str(self.items[-1]))
+        # raise IndexError("Cannot peek from an empty stack.")
 
     # Return the number of elements in the stack
     def length(self):
-        pass
+        return len(self.items)
+
+    def __str__(self):
+        return (
+            "The stack size is: "
+            + str(self.length())
+            + "; Values: "
+            + str(self.get_items())
+        )
 
 
 #  Implement a Circular Queue using an Array or List
@@ -60,3 +89,24 @@ class CircularQueue(Queue):
 
 # run
 q = Queue()
+for i in range(1, 5):
+    q.enqueue(i)
+print(q)
+q.enqueue(5)
+# q.enqueue(5) <- overflow
+q.dequeue()
+print(q)
+q.peek_head()
+
+print()
+
+s = Stack()
+for i in range(2, 10, 2):
+    s.push(i)
+print(s)
+s.push(10)
+# s.push(10) <- overflow
+print(s)
+s.pop()
+print(s)
+s.peek_head()
