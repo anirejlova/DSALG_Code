@@ -47,6 +47,17 @@ class Queue:
         while self.tail != -1:
             print(self.dequeue())
 
+    def reverse(self):
+        print("\nBefore reverse, the queue is ", self.data)
+        stack = Stack()
+        while self.length() > 0:
+            element = self.dequeue()
+            stack.push(element)
+        while stack.length() > 0:
+            element = stack.pop()
+            self.enqueue(element)
+        print("\nThe reversed queue is ", self.data)
+
 
 class Stack:
     def __init__(self):
@@ -94,6 +105,7 @@ class Stack:
 
 
 # run
+print("Queue operations:")
 q = Queue()
 for j in range(10, 20):
     q.enqueue(50 - j)
@@ -105,7 +117,15 @@ for i in range(10, 16):
 q.print_message()
 q.print_all()
 
+print()
+print("\nReverse Queue:")
+q2 = Queue()
+for i in range(0, 5):
+    q2.enqueue(i)
+q2.reverse()
 
+print()
+print("Stack operations:")
 s = Stack()
 for i in range(1, 9):  # raised OverflowError on 6th push <- full stack
     s.push(i)
