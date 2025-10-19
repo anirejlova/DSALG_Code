@@ -17,7 +17,7 @@ class Queue:
     def dequeue(self):
         if self.length() == 0:
             raise IndexError("Queue is empty. Cannot dequeue")
-        self.items.pop(0)
+        return self.items.pop(0)
 
     #  View the element at the head of the queue without removing it
     def peek_head(self):
@@ -31,8 +31,16 @@ class Queue:
     # Design an algorithm to reverse a Queue using Stacks and Queues.
     # (Example: Convert Queue “12345” into Queue “54321”.)
     def reverse(self):
-        # take things from FIFO to LIFO
-        pass
+        # take things from FIFO to LIFO to reverse-FIFO
+        print("Queue before reverse: " + str(self.get_items()))
+        stack = Stack()  # create stack to use as odkládací polička
+        while self.length() != 0:
+            element = self.dequeue()
+            stack.push(element)
+        while stack.length() != 0:
+            element = stack.pop()
+            self.enqueue(element)
+        print("Queue after reverse: " + str(self.get_items()))
 
     def __str__(self):
         return (
@@ -62,7 +70,7 @@ class Stack:
     def pop(self):
         if self.length() == 0:
             raise IndexError("Stack is empty. Cannot pop.")
-        self.items.pop(-1)
+        return self.items.pop(-1)
 
     # View the element at the top of the stack without removing it
     def peek_head(self):
@@ -82,7 +90,7 @@ class Stack:
         )
 
 
-#  Implement a Circular Queue using an Array or List
+#  Implement a Circular Queue using an Array or List -- the last position (tail) connects back to the first (head).
 class CircularQueue(Queue):
     pass
 
@@ -97,6 +105,7 @@ q.enqueue(5)
 q.dequeue()
 print(q)
 q.peek_head()
+q.reverse()
 
 print()
 
