@@ -91,8 +91,20 @@ class Stack:
 
 
 #  Implement a Circular Queue using an Array or List -- the last position (tail) connects back to the first (head).
-class CircularQueue(Queue):
-    pass
+class CircularQueue:
+    def __init__(self):
+        self.items = []
+        self.max_size = 5
+        # keeping track of begging and end
+        self.head = 0
+        self.tail = 0
+
+    def enqueue(self, item):
+        pass
+        # Check if the circular queue is full by comparing the difference between tail and head to max_size.
+        # If it's full, display a message and refrain from adding new data. Otherwise, use the modulus operation (%)
+        # to calculate the tail index for circular wrapping around the queue. Insert the new data at this calculated
+        # index in the data list, then increment the tail index. Display both the updated tail index and the insertion index.
 
 
 # run
