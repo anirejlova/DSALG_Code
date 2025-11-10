@@ -111,6 +111,25 @@ class SinglyLinkedList:
         # update head if the first node was removed
         self.head = dummy.next
 
+# Merge two sorted SLLs into one sorted SLL
+    def merge(self, l1, l2):
+        l3 = SinglyLinkedList()
+        n1 = l1.head
+        n2 = l2.head
+        while n1 is not None and n2 is not None: # traverse both lists
+            if n1.data > n2.data: # compare data
+                l3.insert(n2.data)
+                n2 = n2.next
+            else: # n1.data <= n2.data
+                l3.insert(n1.data)
+                n1 = n1.next
+        while n1 is not None: # append remaining nodes
+            l3.insert(n1.data)
+            n1 = n1.next
+        while n2 is not None: # append remaining nodes
+            l3.insert(n2.data)
+            n2 = n2.next
+        return l3
 
 # run
 # CRUDS test
@@ -146,3 +165,27 @@ sll.traverse()
 print("\nAfter removing 3rd node from the end:")
 sll.remove_nth_from_end(3)
 sll.traverse()
+
+# Merging two sorted SLLs test
+sll1 = SinglyLinkedList()
+sll1.insert(1)
+sll1.insert(4)
+sll1.insert(10)
+sll1.insert(0)
+sll1.bubble_sort()
+
+sll2 = SinglyLinkedList()
+sll2.insert(2)
+sll2.insert(5)
+sll2.insert(-3)
+sll2.insert(-6)
+sll2.bubble_sort()
+
+print("\nList 1:")
+sll1.traverse()
+print("\nList 2:")
+sll2.traverse()
+
+print("\nMerged List:")
+merged_list = sll1.merge(sll1, sll2)
+merged_list.traverse()
