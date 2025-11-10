@@ -51,9 +51,31 @@ class SinglyLinkedList:
         while current:  # traverse the list
             print(current.data)
             current = current.next  # move to the next node
-    
+
+# Sorting algorithm for SLL
+    # basic item swap operation
+    def swap_nodes(self, a, b):
+        temp = a.data
+        a.data = b.data
+        b.data = temp
+
+    # compare neighboring nodes and swap if needed
+    def bubble_sort(self):
+        if self.head is None:
+            return
+        
+        swapped = True # flag indicator to stop earlier
+        while swapped:
+            swapped = False
+            current = self.head
+            while current.next: # traverse till the second last node
+                if current.data > current.next.data: # compare current node with next node
+                    self.swap_nodes(current, current.next)
+                    swapped = True # set flag to True if swap happened
+                current = current.next
 
 # run
+# CRUDS test
 sll = SinglyLinkedList()
 sll.insert(10)
 sll.insert(20)
@@ -64,4 +86,15 @@ print("\nSearching for 20:", sll.search(20))
 print("Searching for 40:", sll.search(40))
 sll.delete(20)
 print("\nTraversing the list after deleting 20:")
+sll.traverse()
+
+# Sorting test
+sll.insert(0)
+sll.insert(50)
+sll.insert(40)
+sll.insert(20)
+print("\nTraversing the unsorted list:")
+sll.traverse()
+print("\nTraversing the sorted list (bubble):")
+sll.bubble_sort()
 sll.traverse()
