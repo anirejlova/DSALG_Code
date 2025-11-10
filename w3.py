@@ -18,7 +18,7 @@ class Recursion:
         return f"Size of array: {self.lenght()}; \n Array before sorting: {self.get_items()}"
     
     def fibonacci(self):
-        
+        pass
 
 # run
 arr = Recursion()
