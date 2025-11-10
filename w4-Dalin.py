@@ -51,3 +51,17 @@ class SinglyLinkedList:
         while current:  # traverse the list
             print(current.data)
             current = current.next  # move to the next node
+    
+
+# run
+sll = SinglyLinkedList()
+sll.insert(10)
+sll.insert(20)
+sll.insert(30)
+print("Traversing the list:")
+sll.traverse()
+print("\nSearching for 20:", sll.search(20))
+print("Searching for 40:", sll.search(40))
+sll.delete(20)
+print("\nTraversing the list after deleting 20:")
+sll.traverse()
