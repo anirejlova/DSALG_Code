@@ -81,7 +81,7 @@ class SinglyLinkedList:
                     swapped = True  # set flag to True if swap happened
                 current = current.next
 
-    # algorithm to reverse SLL
+# algorithm to reverse SLL
     def reverse(self):
         prev = None
         current = self.head
@@ -91,6 +91,25 @@ class SinglyLinkedList:
             prev = current  # moce to the next node
             current = next_node
         self.head = prev  # reset head to the new first node
+
+# remove N-th node from the end of SLL
+    def remove_nth_from_end(self, n):
+        # create a dummy node that precedes the list/head
+        dummy = Node(0)
+        dummy.next = self.head
+        first = dummy
+        second = dummy
+        # Move the first reference N nodes ahead
+        for _ in range(n + 1):
+            first = first.next
+        # Move both references until first reaches the end
+        while first:
+            first = first.next
+            second = second.next
+        # Second reference is now at the node before the target node
+        second.next = second.next.next  # remove the target node
+        # update head if the first node was removed
+        self.head = dummy.next
 
 
 # run
@@ -121,4 +140,9 @@ sll.traverse()
 # Reversing test
 print("\nAfter reversing:")
 sll.reverse()
+sll.traverse()
+
+# Remove N-th node from end test
+print("\nAfter removing 3rd node from the end:")
+sll.remove_nth_from_end(3)
 sll.traverse()
