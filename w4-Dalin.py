@@ -21,4 +21,10 @@ class SinglyLinkedList:
             current.next = new_node  # link the last node to the new node
     
     # search method - SLL is traversed till its end to find target data
-    
+    def search(self, target_data):
+        current = self.head  # start at the head
+        while current:  # traverse the list
+            if current.data == target_data:  # check if current node's data matches target
+                return True  # target found
+            current = current.next  # move to the next node
+        return False  # target not found
