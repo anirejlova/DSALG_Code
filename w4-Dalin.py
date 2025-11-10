@@ -28,3 +28,26 @@ class SinglyLinkedList:
                 return True  # target found
             current = current.next  # move to the next node
         return False  # target not found
+    
+    # delete method - go through SLL till its end to find target data and remove it
+    def delete(self, target_data):
+        if not self.head:  # if list is empty
+            return
+        
+        if self.head.data == target_data: # deleting head node if it matches taget
+            self.head = self.head.next  # set head as the next node
+            return
+        
+        current = self.head  # start at the head
+        while current.next:  # traverse the list
+            if current.next.data == target_data:  # check if next node's data matches target
+                current.next = current.next.next  # delete the node
+                return
+            current = current.next  # move to the next node
+
+    # traverse method - SLL traversed till its end to print all data
+    def traverse(self):
+        current = self.head  # start at the head
+        while current:  # traverse the list
+            print(current.data)
+            current = current.next  # move to the next node
