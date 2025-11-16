@@ -1,4 +1,5 @@
 # BINARY SEARCH TREES
+# the public method calling the same-called private method with the root node as argument is RECURSION
 
 
 class Node:
@@ -87,3 +88,83 @@ class BST:
         while current.left is not None:
             current = current.left
         return current
+
+    # Implemented traverse method to output all data items
+    # 2 ways: breadth-first and depth-first (pre-order, in-order, post-order)
+
+    # DEPTH-FIRST TRAVERSAL METHODS
+    def inorder(self):
+        self._inorder(self.root)
+        print()  # for newline after traversal
+
+    def _inorder(self, curr_node):
+        if curr_node is not None:
+            self._inorder(curr_node.left)
+            print(curr_node.value, end=" ")
+            self._inorder(curr_node.right)
+
+    def preorder(self):
+        self._preorder(self.root)
+        print()  # for newline after traversal
+
+    def _preorder(self, curr_node):
+        if curr_node is not None:
+            print(curr_node.value, end=" ")
+            self._preorder(curr_node.left)
+            self._preorder(curr_node.right)
+
+    def postorder(self):
+        self._postorder(self.root)
+        print()  # for newline after traversal
+
+    def _postorder(self, curr_node):
+        if curr_node is not None:
+            self._postorder(curr_node.left)
+            self._postorder(curr_node.right)
+            print(curr_node.value, end=" ")
+
+    # BREADTH-FIRST TRAVERSAL
+    def breadth_first(self):
+        result = []  # list to store the order of traversal
+        queue = [self.root]
+
+        while queue:
+            curr_node = queue.pop(0)
+            if curr_node:
+                result.append(curr_node.value)
+                queue.append(curr_node.left)
+                queue.append(curr_node.right)
+        print(result)
+
+
+# test BST
+bst = BST()
+bst.insert(50)
+bst.insert(30)
+bst.insert(20)
+bst.insert(40)
+bst.insert(70)
+bst.insert(60)
+bst.insert(80)
+print("Inorder traversal:")
+bst.inorder()
+print("Preorder traversal:")
+bst.preorder()
+print("Postorder traversal:")
+bst.postorder()
+
+print("Breadth-first traversal:")
+bst.breadth_first()
+
+print("Search for 40:", bst.search(40))
+print("Search for 100:", bst.search(100))
+
+print("Delete 20:")
+bst.delete(20)
+
+print("Inorder traversal after deleting 20:")
+bst.inorder()
+
+# Post-order: visit left subtree, then right subtree, then the node itself. Leaves come first, parents last. For your tree it prints: 20 40 30 60 80 70 50
+
+# Breadth-first (level-order): visit nodes level by level from the root, left to right, using a queue. For your tree it produces: [50, 30, 70, 20, 40, 60, 80]
