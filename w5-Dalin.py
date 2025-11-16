@@ -217,3 +217,12 @@ bst.inorder()
 # Post-order: visit left subtree, then right subtree, then the node itself. Leaves come first, parents last. For your tree it prints: 20 40 30 60 80 70 50
 
 # Breadth-first (level-order): visit nodes level by level from the root, left to right, using a queue. For your tree it produces: [50, 30, 70, 20, 40, 60, 80]
+
+# EXCERCISE 2 - iteration
+print()
+print("Iterative inorder traversal:")
+bst.inorder_iter()
+print("Iterative preorder traversal:")
+bst.preorder_iter()
+print("Iterative postorder traversal:")
+bst.postorder_iter()
