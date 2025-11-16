@@ -136,6 +136,55 @@ class BST:
                 queue.append(curr_node.right)
         print(result)
 
+    # Implementing the traversal methods iteratively, which will keep track of the nodes using a stack.
+    def preorder_iter(self):
+        # For the preOrder traversal (VLR), after visiting a node's value, we push its right and then its left child onto the stack. Given the nature of a stack- FILO, the left child will be the first to be popped.
+        if not self.root:
+            return []
+
+        stack, output = [self.root], []
+        while stack:
+            node = stack.pop()
+            if node:
+                output.append(node.value)
+                if node.right:
+                    stack.append(node.right)
+                if node.left:
+                    stack.append(node.left)
+        print(output)  # return output
+
+    def inorder_iter(self):
+        # For the inOrder traversal (LVR), we keep pushing the left child nodes onto the stack. When a node has no left child (or its left child is already visited), its value will be visited and its right child will be pushed onto the stack.
+        stack, output = [], []
+        current = self.root
+        while stack or current:
+            while current:
+                stack.append(current)
+                current = current.left
+            current = stack.pop()
+            output.append(current.value)
+            current = current.right
+        print(output)  # return output
+
+    def postorder_iter(self):
+        # For the postOrder traversal (LRV), we use two stacks. The first stack is used to traverse all the nodes and sort their sequence before pushing them onto the second stack. Once all the nodes have been visited and the first stack is empty, we visit and output the values of the nodes from the second stack, following FILO.
+        if not self.root:
+            return []
+        stack1, stack2 = [self.root], []
+
+        while stack1:
+            node = stack1.pop()
+            stack2.append(node)
+            if node.left:
+                stack1.append(node.left)
+            if node.right:
+                stack1.append(node.right)
+        output = []
+        while stack2:
+            node = stack2.pop()
+            output.append(node.value)
+        print(output)  # return output
+
 
 # test BST
 bst = BST()
