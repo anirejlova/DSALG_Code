@@ -35,3 +35,21 @@ class Recursion:
             f2 = out
             print(f"{str(i)}-th Fibbonaci number is: {str(out)}")
         return out
+
+    # recursive fibonnaci - inputs > 2, output is the sum of two prevous outputs
+    # recursion stops when input is 1 or 2 - output being 1 for these cases
+    def fib_recur(self, n):
+        if n < 1:
+            print("ValueError: n must be postive integer")
+            # raise ValueError("n must be postive integer")
+        if n == 1 or n == 2:
+            return 1
+        else:
+            return self.fib_recur(n - 1) + self.fib_recur(n - 2)
+
+
+# run test
+arr = Recursion()
+arr.initialise()
+arr.fib_iter(10)
+print("Recursive Fibbonaci number:", arr.fib_recur(10))
