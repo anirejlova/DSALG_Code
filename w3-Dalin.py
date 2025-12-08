@@ -47,9 +47,24 @@ class Recursion:
         else:
             return self.fib_recur(n - 1) + self.fib_recur(n - 2)
 
+    # find the greatest common divisor (GCD) of 2 positive integers
+    # If ints equal, GCD is that number
+    # otherwise, GCD is GCD of smaller number and the positive difference of the two ints
+    def gcd(self, n, m):  # 2 inputs
+        if n == m:
+            return n
+        elif n < m:  # n is smaller
+            return self.gcd(m - n, n)  # recursive call
+        else:  # m is smaller
+            return self.gcd(n - m, m)  # recursive call
+
 
 # run test
 arr = Recursion()
 arr.initialise()
 arr.fib_iter(10)
-print("Recursive Fibbonaci number:", arr.fib_recur(10))
+print("Recursive Fibbonaci number: ", arr.fib_recur(10))
+
+# test GCD
+print("GCD of 27 & 18 is: " + str(arr.gcd(27, 18)))
+print("GCD of 28 & 19 is: " + str(arr.gcd(28, 19)))
