@@ -58,6 +58,52 @@ class Recursion:
         else:  # m is smaller
             return self.gcd(n - m, m)  # recursive call
 
+    # Merge sort implementation
+    # Merge Sort divides the array into halves recursively until each part has at most one element. Then merges the sorted halves into a single sorted array until there is only one sorted group.
+    def merge_sort(self):
+        # arr has to be sorted array
+        self._merge_sort(
+            self.data, 0, len(self.data) - 1
+        )  # helper function - (array to be sorted, left (start) & right(length) boundaries)
+        print("After the merge sort: ", str(self.data))
+
+    def _merge_sort(self, arr, start, end):
+        if start >= end:
+            return  # base case - array of 1 or less elements is already sorted
+        mid = (
+            start + end
+        ) // 2  # alternatively:  (end- start) // 2 + start, because of int overflow in other languages
+        self._merge_sort(arr, start, mid)  # sort left half
+        self._merge_sort(arr, mid + 1, end)  # sort right half
+        self._merge(arr, start, mid, end)  # merge sorted halves
+
+    def _merge(self, arr, start, mid, end):
+        temp = []  # temporary array to hold merged result
+        left = start  # starting index for left subarray
+        right = mid + 1  # starting index for right subarray
+
+        # compare the first elements of each subarray, the smaller one is inserted first
+        while left <= mid and right <= end:
+            if arr[left] <= arr[right]:
+                temp.append(arr[left])
+                left += 1
+            else:
+                temp.append(arr[right])
+                right += 1
+
+        # when one subarray is exhausted, append the remaining elements of the other subarray
+        # only one of these loops will execute
+        while left <= mid:
+            temp.append(arr[left])
+            left += 1
+        while right <= end:
+            temp.append(arr[right])
+            right += 1
+
+        # upfate original array with merged result
+        for i in range(len(temp)):
+            arr[start + i] = temp[i]
+
 
 # run test
 arr = Recursion()
@@ -68,3 +114,8 @@ print("Recursive Fibbonaci number: ", arr.fib_recur(10))
 # test GCD
 print("GCD of 27 & 18 is: " + str(arr.gcd(27, 18)))
 print("GCD of 28 & 19 is: " + str(arr.gcd(28, 19)))
+
+# test merge sort
+arr.initialise()
+arr.print_all()
+arr.merge_sort()
